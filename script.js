@@ -7,7 +7,7 @@ const myJob  = "Aspiring Web Developer";
 const myCity = "Prayagraj";
 
 // 3. Print them using a template literal
-console.log(`My name is ${myname}.`);
+console.log(`My name is ${mynameE2}.`);
 console.log(`I am a ${myJob} from ${myCity}.`);
 
 // 4. A simple function
@@ -59,3 +59,42 @@ window.addEventListener('load', function() {
   console.log('Page fully loaded!');
   console.log(`Welcome to ${document.title}`);
 });
+
+// === ARRAYS & LOOPS ===
+
+// 1. Skills array
+const skillsList = ["HTML", "CSS", "JavaScript","Git & GitHub", "Responsive Design","AI \ ML" , "Data Science"];
+
+// 2. Grab the empty ul from HTML
+const skillsUl = document.querySelector('#skillsList');
+
+// 3. Loop through skills and add each one to the page
+skillsList.forEach(function(skill) {
+  // create a new <li> element
+  const li = document.createElement('li');
+  
+  // set its text
+  li.textContent = skill;
+  
+  // add it to the ul
+  skillsUl.appendChild(li);
+});
+
+// 4. Log how many skills you have
+console.log(`I have ${skillsList.length} skills so far!`);
+
+// Exercise 1 — add to your skillsList array
+skillsList.push("React");
+skillsList.push("Node.js");
+
+// Exercise 2 — hobbies array with for...of
+const hobbies = ["coding", "reading", "gaming"];
+for (let hobby of hobbies) {
+  console.log(hobby);
+}
+
+// Exercise 3 — numbers multiplied by 2
+const numbers = [1, 2, 3, 4, 5];
+for (let i = 0; i < numbers.length; i++) {
+  console.log(numbers[i] * 2);
+}
