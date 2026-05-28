@@ -4,7 +4,7 @@ console.log("Portfolio loaded!");
 // 2. Store your info in variables
 const mynameE2 = "Rahul Gupta";
 const myJob  = "Aspiring Web Developer";
-const myCity = "Prayagraj";
+const myCity = "Mahoba";
 
 // 3. Print them using a template literal
 console.log(`My name is ${mynameE2}.`);
@@ -63,7 +63,7 @@ window.addEventListener('load', function() {
 // === ARRAYS & LOOPS ===
 
 // 1. Skills array
-const skillsList = ["HTML", "CSS", "JavaScript","Git & GitHub", "Responsive Design","AI \ ML" , "Data Science"];
+const skillsList = ["HTML", "CSS", "JavaScript","Git & GitHub", "Responsive Design","AI/ML" , "Data Science","Meachine Learning","Deep Leaening","Pythone","Java","PyTorch"];
 
 // 2. Grab the empty ul from HTML
 const skillsUl = document.querySelector('#skillsList');
@@ -99,3 +99,31 @@ const numbers = [1, 2, 3, 4, 5];
 for (let i = 0; i < numbers.length; i++) {
   console.log(numbers[i] * 2);
 }
+// === OBJECTS ===
+
+const developer = {
+  name:     "Rahul Gupta",
+  age:       21,
+  city:     "Prayagraj",
+  country:  "India",                    // ← exercise 1 added here
+  job:      "Aspiring Web Developer & AI/ML Engineer",
+  skills:   ["HTML", "CSS", "JavaScript", "Git", "React"],
+  goals:    ["Get a job", "Learn AI/ML", "Build real projects"],
+
+  introduce: function() {
+    console.log(`Hi! I am ${this.name} from ${this.city}.`);
+    console.log(`I want to be a ${this.job}.`);
+    console.log(`I know ${this.skills.length} skills so far!`);
+  },                                    // ← comma here!
+
+  showGoals: function() {               // ← add inside same object
+    this.goals.forEach(function(goal) {
+      console.log(goal);
+    });
+  }
+};
+
+// Call both methods
+developer.introduce();
+developer.showGoals();
+console.log(developer.country);
