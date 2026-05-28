@@ -1,98 +1,859 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Rahul Gupta Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    
-  </head>
-  
-  <body>
-    <div class="container">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahul Gupta — AI Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050508;
+  --surface: #0e0e14;
+  --surface2: #16161f;
+  --accent: #6ee7b7;
+  --accent2: #818cf8;
+  --accent3: #f472b6;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --border: #1e1e2e;
+}
 
-      <!-- NAVBAR -->
-      <header>
-        <span class="logo">Rahul Gupta</span>
-        <nav>
-          <a href="#">Home</a>
-          <a href="#Skills">My Skills</a>
-          <a href="#goals">My Goals</a>
-        </nav>
-      </header>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-      <main>
+html { scroll-behavior: smooth; }
 
-        <!-- HERO -->
-        <section class="hero-section">
-          <img src="rahul.jpg.jpeg" alt="Rahul Gupta" id="myimg">
-          <h1 id="myname">Rahul Gupta</h1>
-          <h3>Aspiring Developer and AI/ML Engineer</h3>
-          <button id="greetbtn">Say Hello 👋 </button>
-        </section>
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
 
-        <!-- ABOUT — full width -->
-        <section id="about" class="card">
-          <p class="intro">Hello! My name is <strong>Rahul Gupta</strong>.
-          I am starting my journey to become a Web Developer and AI/ML Engineer.</p>
-        </section>
+/* Custom cursor */
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease;
+  mix-blend-mode: difference;
+}
 
-        <!-- SKILLS + GOALS — side by side -->
-        <div class="two-col">
-          <section id="Skills" class="card">
-            <h2>My Skills (In Progress)</h2>
-            <ul id="skillsList">
-              <!-- this will filled by js -->
-            </ul>
-          </section>
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: all 0.12s ease;
+  opacity: 0.5;
+}
 
-       
-          <section id="goals" class="card">
-            <h2>My Goals</h2>
-            <ol>
-              <li>To Earn and Grow in software industry</li>
-              <li>Improve my Skills in AI/ML </li>
-              <li>Complete 3-5 real world project with measurable impact </li>
-              <li>Gain hands on experience through intenship and freelance work</li>
-              <li>Learn tool like pythone ,pytorch, numpy , github,git</li>
-            </ol>
-            <p>I want to grow as a developer and achieve
-            financial and personal goals.</p>
-          </section>
-        </div>
-        <!-- PROJECTS SECTION -->
-<section id="projects">
-  <h2>My Projects</h2>
+/* Grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Noise overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.25rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(5,5,8,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+.nav-links a {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+/* Sections */
+section, .section-wrap { position: relative; z-index: 2; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8rem 3rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(110,231,183,0.08) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 12vw, 10rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 .line1 { color: var(--text); display: block; }
+.hero h1 .line2 { color: var(--accent); display: block; }
+
+.hero-desc {
+  max-width: 520px;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+}
+
+.hero-desc strong { color: var(--text); font-weight: 600; }
+
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent);
+  color: #050508;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(110,231,183,0.3); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover { border-color: var(--accent2); color: var(--accent2); }
+
+/* Stats row */
+.stats-row {
+  display: flex;
+  gap: 3rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.stat-item .num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.stat-item .label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.25rem;
+}
+
+/* ABOUT */
+.about {
+  padding: 6rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.about-img-wrap {
+  position: relative;
+}
+
+.about-img-wrap img {
+  width: 100%;
+  max-width: 340px;
+  border-radius: 8px;
+  display: block;
+  filter: grayscale(20%);
+  border: 1px solid var(--border);
+}
+
+.about-img-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  opacity: 0.3;
+}
+
+.about-img-wrap::after {
+  content: 'MCA · AI Engineer';
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  background: var(--accent);
+  color: #050508;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.4rem 0.9rem;
+  border-radius: 4px;
+  letter-spacing: 0.1em;
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--accent2);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.25rem;
+  line-height: 1;
+}
+
+.about-text {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.about-text strong { color: var(--text); }
+
+/* SKILLS */
+.skills-section {
+  padding: 6rem 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-card:hover { border-color: rgba(110,231,183,0.2); transform: translateY(-3px); }
+
+.skill-category {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.skill-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.tag {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.tag:hover { border-color: var(--accent); color: var(--accent); }
+
+/* PROJECTS */
+.projects-section {
+  padding: 6rem 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  transition: all 0.25s;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card.featured {
+  grid-column: span 2;
+  background: linear-gradient(135deg, var(--surface) 0%, #0d1a14 100%);
+  border-color: rgba(110,231,183,0.2);
+}
+
+.project-card:hover {
+  border-color: rgba(110,231,183,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.project-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.project-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.project-card p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.accuracy-badge {
+  background: rgba(110,231,183,0.1);
+  border: 1px solid rgba(110,231,183,0.3);
+  color: var(--accent);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+}
+
+.project-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent2);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: gap 0.2s;
+}
+
+.project-link:hover { gap: 0.6rem; }
+
+.project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+/* CONTACT */
+.contact-section {
+  padding: 6rem 3rem;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-section .section-title { font-size: 4rem; margin-bottom: 1rem; }
+
+.contact-desc {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+.contact-link .icon { font-size: 1.1rem; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+footer p { font-size: 0.8rem; color: var(--muted); }
+footer .foot-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--accent); }
+
+/* Divider */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  position: relative;
+  z-index: 2;
+}
+
+/* Animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1.5rem; }
+  .hero { padding: 7rem 1.5rem 3rem; }
+  .about { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+  .about-img-wrap { display: none; }
+  .skills-section, .projects-section, .contact-section { padding: 4rem 1.5rem; }
+  .project-card.featured { grid-column: span 1; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  .stats-row { gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">RG</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-tag">Available for internships & AI roles</div>
+  <h1>
+    <span class="line1">Rahul</span>
+    <span class="line2">Gupta</span>
+  </h1>
+  <p class="hero-desc">
+    <strong>AI / ML Engineer in training.</strong> MCA student at KNIT Sultanpur building end-to-end AI systems — from ML pipelines to GenAI applications and RAG chatbots.
+  </p>
+  <div class="hero-btns">
+    <a href="#projects" class="btn-primary">View Projects →</a>
+    <a href="https://github.com/Rahulgupta-63" target="_blank" class="btn-secondary">GitHub ↗</a>
+  </div>
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="num">82%</div>
+      <div class="label">Titanic Accuracy</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">99.1%</div>
+      <div class="label">MNIST CNN</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">0.81</div>
+      <div class="label">Housing R²</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">5+</div>
+      <div class="label">Projects Built</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<div class="about section-wrap" id="about">
+  <div class="about-img-wrap fade-up">
+    <img src="rahul.jpg.jpeg" alt="Rahul Gupta">
+  </div>
+  <div class="fade-up">
+    <div class="section-label">// About Me</div>
+    <h2 class="section-title">Building Real AI Systems</h2>
+    <p class="about-text">
+      I am a first-year MCA student at <strong>Kamla Nehru Institute of Technology, Sultanpur</strong>, affiliated to CSJMU Kanpur. My background in <strong>B.Sc Mathematics (Honours)</strong> gives me a strong foundation in the statistics and linear algebra behind ML algorithms.
+    </p>
+    <p class="about-text">
+      I am not just learning theory — I build real projects with measurable results. Currently in Phase 4 of my AI Engineer roadmap, working on <strong>GenAI, LLM APIs, embeddings, vector databases, RAG pipelines, and LangChain.</strong>
+    </p>
+    <p class="about-text">
+      My target: join an <strong>AI-first startup or product company</strong> as an AI/ML Engineer after completing my roadmap. Open to internships immediately.
+    </p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="fade-up">
+    <div class="section-label">// Technical Skills</div>
+    <h2 class="section-title">What I Know</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card fade-up">
+      <div class="skill-category">Core Language</div>
+      <h3>Python</h3>
+      <div class="skill-tags">
+        <span class="tag">Functions</span>
+        <span class="tag">OOP</span>
+        <span class="tag">Comprehensions</span>
+        <span class="tag">File Handling</span>
+        <span class="tag">Lambda</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-category">Data Science</div>
+      <h3>Data Libraries</h3>
+      <div class="skill-tags">
+        <span class="tag">NumPy</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Matplotlib</span>
+        <span class="tag">EDA</span>
+        <span class="tag">Scikit-learn</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-category">ML Algorithms</div>
+      <h3>Machine Learning</h3>
+      <div class="skill-tags">
+        <span class="tag">Random Forest</span>
+        <span class="tag">Logistic Reg</span>
+        <span class="tag">Decision Tree</span>
+        <span class="tag">KNN</span>
+        <span class="tag">Model Evaluation</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-category">Neural Networks</div>
+      <h3>Deep Learning</h3>
+      <div class="skill-tags">
+        <span class="tag">PyTorch</span>
+        <span class="tag">CNNs</span>
+        <span class="tag">Backpropagation</span>
+        <span class="tag">Training Loop</span>
+        <span class="tag">Adam / BCELoss</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-category">In Progress</div>
+      <h3>GenAI & LLMs</h3>
+      <div class="skill-tags">
+        <span class="tag">Prompt Engineering</span>
+        <span class="tag">LLM APIs</span>
+        <span class="tag">Embeddings</span>
+        <span class="tag">ChromaDB</span>
+        <span class="tag">RAG</span>
+        <span class="tag">LangChain</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-category">Tools</div>
+      <h3>Developer Tools</h3>
+      <div class="skill-tags">
+        <span class="tag">Git</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">Google Colab</span>
+        <span class="tag">VS Code</span>
+        <span class="tag">SQL basics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section class="projects-section" id="projects">
+  <div class="fade-up">
+    <div class="section-label">// Projects</div>
+    <h2 class="section-title">What I've Built</h2>
+  </div>
   <div class="projects-grid">
 
-    <div class="project-card featured">
-      
-      <h3>Machine Learning Projects </h3>
-      <p>My first ever Titanic amd california_housing_socity project.</p>
-      <a href="https://github.com/Rahulgupta-63/ai-engineer-journey">View Project</a>
+    <div class="project-card featured fade-up">
+      <div class="project-num">01 — Featured</div>
+      <h3>RAG Pipeline — Zomato Chatbot</h3>
+      <p>Built a complete Retrieval Augmented Generation pipeline from scratch. Uses ChromaDB as vector database, Sentence Transformers for embeddings, and Llama 3.3 via Groq API. System answers from custom documents with zero hallucination — says "I don't have that information" when answer is not in documents.</p>
+      <div class="project-stack">
+        <span class="tag">Python</span>
+        <span class="tag">ChromaDB</span>
+        <span class="tag">LangChain</span>
+        <span class="tag">Groq API</span>
+        <span class="tag">Llama 3.3</span>
+        <span class="tag">SentenceTransformers</span>
+      </div>
+      <div class="project-meta">
+        <span class="accuracy-badge">✓ No Hallucination</span>
+        <a href="https://github.com/Rahulgupta-63/ai-engineer-journey" target="_blank" class="project-link">View Code →</a>
+      </div>
     </div>
 
-    <div class="project-card">
-      <h3>Portfolio Site</h3>
-      <p>A personal portfolio to showcase my work.</p>
-      <a href="https://rahulgupta-63.github.io/my-portfolio/">View Project</a>
+    <div class="project-card fade-up">
+      <div class="project-num">02</div>
+      <h3>MNIST Digit Recognition — CNN</h3>
+      <p>Built a Convolutional Neural Network using PyTorch from scratch. Trained on 70,000 handwritten digit images using Conv2d, MaxPooling, and Flatten layers. Full training loop with Adam optimizer and BCELoss.</p>
+      <div class="project-stack">
+        <span class="tag">PyTorch</span>
+        <span class="tag">CNN</span>
+        <span class="tag">Deep Learning</span>
+      </div>
+      <div class="project-meta">
+        <span class="accuracy-badge">99.10% Accuracy</span>
+        <a href="https://github.com/Rahulgupta-63/ai-engineer-journey" target="_blank" class="project-link">View →</a>
+      </div>
     </div>
 
-    <div class="project-card">
-      <h3>Deep Learning Project</h3>
-      <p>MNIST Handwritten Digit Recognition (CNN)</p>
-      <a href="https://github.com/Rahulgupta-63/ai-engineer-journey">View Project</a>
+    <div class="project-card fade-up">
+      <div class="project-num">03</div>
+      <h3>Titanic Survival Prediction</h3>
+      <p>End-to-end ML classification project. Compared Decision Tree, Logistic Regression, KNN, and Random Forest. Performed EDA, handled missing values, and evaluated using F1, precision, and recall metrics.</p>
+      <div class="project-stack">
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Random Forest</span>
+      </div>
+      <div class="project-meta">
+        <span class="accuracy-badge">82% Accuracy</span>
+        <a href="https://github.com/Rahulgupta-63/ai-engineer-journey" target="_blank" class="project-link">View →</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-num">04</div>
+      <h3>California House Price Prediction</h3>
+      <p>Regression model comparing Linear Regression vs Random Forest on the California Housing dataset. Applied feature engineering, normalization, and model evaluation using R² score.</p>
+      <div class="project-stack">
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Matplotlib</span>
+      </div>
+      <div class="project-meta">
+        <span class="accuracy-badge">R² = 0.81</span>
+        <a href="https://github.com/Rahulgupta-63/ai-engineer-journey" target="_blank" class="project-link">View →</a>
+      </div>
     </div>
 
   </div>
 </section>
 
-      </main>
+<div class="divider"></div>
 
-      <footer id="sitefoot">
-        <p>&copy; <strong>Rahul Gupta</strong> — All Rights Reserved</p>
-      </footer>
-
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="fade-up">
+    <div class="section-label">// Contact</div>
+    <h2 class="section-title">Let's Connect</h2>
+    <p class="contact-desc">
+      I am actively looking for <strong>AI/ML internships</strong> and off-campus opportunities. If you are building something interesting with AI — I want to be part of it.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:rahulguptainps@gmail.com" class="contact-link">
+        <span class="icon">✉</span> rahulguptainps@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/rahul-gupta-48779636b" target="_blank" class="contact-link">
+        <span class="icon">in</span> LinkedIn
+      </a>
+      <a href="https://github.com/Rahulgupta-63" target="_blank" class="contact-link">
+        <span class="icon">⌥</span> GitHub
+      </a>
     </div>
-      <script src="script.js"></script>
-  </body>
-</html>
+  </div>
+</section>
 
+<footer>
+  <div class="foot-logo">RG</div>
+  <p>© 2025 Rahul Gupta — Aspiring AI Engineer</p>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 6 + 'px';
+  cursor.style.top = my - 6 + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx - 18 + 'px';
+  ring.style.top = ry - 18 + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(2.5)');
+  el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+});
+
+// Fade up on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
