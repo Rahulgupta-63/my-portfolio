@@ -610,7 +610,7 @@ footer .foot-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; co
       <div class="label">Housing R²</div>
     </div>
     <div class="stat-item">
-      <div class="num">5+</div>
+      <div class="num">5</div>
       <div class="label">Projects Built</div>
     </div>
   </div>
@@ -729,64 +729,75 @@ footer .foot-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; co
 
     <div class="project-card featured fade-up">
       <div class="project-num">01 — Featured</div>
-      <h3>RAG Pipeline — Zomato Chatbot</h3>
-      <p>Built a complete Retrieval Augmented Generation pipeline from scratch. Uses ChromaDB as vector database, Sentence Transformers for embeddings, and Llama 3.3 via Groq API. System answers from custom documents with zero hallucination — says "I don't have that information" when answer is not in documents.</p>
+      <h3>RAG Study Assistant</h3>
+      <p>Retrieval-augmented Q&A system. Uses ChromaDB as vector store, Sentence Transformers for embeddings, and Llama 3.3 via Groq API. Answers only from uploaded documents — says "I don't have that in my notes" when the answer isn't in the source material. Deployed live on HuggingFace Spaces.</p>
       <div class="project-stack">
         <span class="tag">Python</span>
         <span class="tag">ChromaDB</span>
-        <span class="tag">LangChain</span>
         <span class="tag">Groq API</span>
-        <span class="tag">Llama 3.3</span>
-        <span class="tag">SentenceTransformers</span>
+        <span class="tag">Streamlit</span>
       </div>
       <div class="project-meta">
-        <span class="accuracy-badge">✓ No Hallucination</span>
-        <a href="https://github.com/Rahulgupta-63/ai-engineer-journey" target="_blank" class="project-link">View Code →</a>
+        <span class="accuracy-badge">Live Demo</span>
+        <a href="https://github.com/Rahulgupta-63/rag-study-assistant" target="_blank" class="project-link">View Code →</a>
       </div>
     </div>
 
     <div class="project-card fade-up">
       <div class="project-num">02</div>
-      <h3>MNIST Digit Recognition — CNN</h3>
-      <p>Built a Convolutional Neural Network using PyTorch from scratch. Trained on 70,000 handwritten digit images using Conv2d, MaxPooling, and Flatten layers. Full training loop with Adam optimizer and BCELoss.</p>
+      <h3>RAG FastAPI Service</h3>
+      <p>Same retrieval pipeline exposed as a REST API instead of a UI. FastAPI + Pydantic, containerized with Docker so it can be called from any client.</p>
       <div class="project-stack">
-        <span class="tag">PyTorch</span>
-        <span class="tag">CNN</span>
-        <span class="tag">Deep Learning</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Pydantic</span>
       </div>
       <div class="project-meta">
-        <span class="accuracy-badge">99.10% Accuracy</span>
-        <a href="https://github.com/Rahulgupta-63/ai-engineer-journey" target="_blank" class="project-link">View →</a>
+        <span class="accuracy-badge">REST API</span>
+        <a href="https://github.com/Rahulgupta-63/rag-fastapi-service" target="_blank" class="project-link">View →</a>
       </div>
     </div>
 
     <div class="project-card fade-up">
       <div class="project-num">03</div>
-      <h3>Titanic Survival Prediction</h3>
-      <p>End-to-end ML classification project. Compared Decision Tree, Logistic Regression, KNN, and Random Forest. Performed EDA, handled missing values, and evaluated using F1, precision, and recall metrics.</p>
+      <h3>NayePankh Chatbot</h3>
+      <p>RAG-based chatbot built as a hiring task for NayePankh Foundation, a UP-registered NGO. Answers questions about the foundation using retrieved context, not hardcoded FAQs.</p>
       <div class="project-stack">
-        <span class="tag">Scikit-learn</span>
-        <span class="tag">Pandas</span>
-        <span class="tag">Random Forest</span>
+        <span class="tag">LangChain</span>
+        <span class="tag">ChromaDB</span>
+        <span class="tag">Groq API</span>
       </div>
       <div class="project-meta">
-        <span class="accuracy-badge">82% Accuracy</span>
-        <a href="https://github.com/Rahulgupta-63/ai-engineer-journey" target="_blank" class="project-link">View →</a>
+        <span class="accuracy-badge">Live Demo</span>
+        <a href="https://github.com/Rahulgupta-63/nayepankh-chatbot" target="_blank" class="project-link">View →</a>
       </div>
     </div>
 
     <div class="project-card fade-up">
       <div class="project-num">04</div>
-      <h3>California House Price Prediction</h3>
-      <p>Regression model comparing Linear Regression vs Random Forest on the California Housing dataset. Applied feature engineering, normalization, and model evaluation using R² score.</p>
+      <h3>ML Fundamentals — Titanic & Housing</h3>
+      <p>Two foundational ML projects. Titanic: classification with Random Forest. California Housing: regression comparing Linear Regression vs Random Forest.</p>
       <div class="project-stack">
         <span class="tag">Scikit-learn</span>
         <span class="tag">Pandas</span>
-        <span class="tag">Matplotlib</span>
       </div>
       <div class="project-meta">
-        <span class="accuracy-badge">R² = 0.81</span>
-        <a href="https://github.com/Rahulgupta-63/ai-engineer-journey" target="_blank" class="project-link">View →</a>
+        <span class="accuracy-badge">82% acc · R²=0.81</span>
+        <a href="https://github.com/Rahulgupta-63/ml-fundamentals" target="_blank" class="project-link">View →</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-num">05</div>
+      <h3>MNIST Digit Recognition — CNN</h3>
+      <p>Convolutional Neural Network in PyTorch, trained on 70,000 handwritten digit images. Conv2d, MaxPooling, Adam optimizer.</p>
+      <div class="project-stack">
+        <span class="tag">PyTorch</span>
+        <span class="tag">CNN</span>
+      </div>
+      <div class="project-meta">
+        <span class="accuracy-badge">99.10% Accuracy</span>
+        <a href="https://github.com/Rahulgupta-63/mnist-cnn" target="_blank" class="project-link">View →</a>
       </div>
     </div>
 
@@ -819,7 +830,7 @@ footer .foot-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; co
 
 <footer>
   <div class="foot-logo">RG</div>
-  <p>© 2025 Rahul Gupta — Aspiring AI Engineer</p>
+  <p>© 2026 Rahul Gupta</p>
 </footer>
 
 <script>
